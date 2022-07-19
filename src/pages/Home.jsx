@@ -8,48 +8,44 @@ import { useEffect } from "react";
 
 const Home = () =>  {
 
-    const diaryList = useContext(DiaryStateContext)
+    const diaryList = useContext(DiaryStateContext);
 
-    const [data, setData] = useState([]);
-
+    const [data, setData] = useState([])
     const [curDate, setCurDate] = useState(new Date());
-
-    // 월을 가져오는거는 1월이 0임
     const headText = `${curDate.getFullYear()}년 ${curDate.getMonth() + 1}월`
 
-    useEffect(() => {
+    const increaseMonth = () => {
+        setCurDate(new Date(curDate.getFullYear(), curDate.getMonth() + 1, curDate.getDate()))
+    }
 
+    const decreaseMonth = () => {
+        setCurDate(new Date(curDate.getFullYear(), curDate.getMonth() - 1, curDate.getDate()))
+    }
+
+    useEffect(() => {
         if(diaryList.length >= 1) {
             const firstDay = new Date(
                 curDate.getFullYear(),
                 curDate.getMonth(),
                 1
-            ).getTime();
+            ).getTime()
     
             const lastDay = new Date(
                 curDate.getFullYear(),
-                curDate.getMonth() + 1,
+                curDate.getMonth()+1,
                 0
             ).getTime()
-    
-            setData(diaryList.filter((item) => item.date >= firstDay && item.date <= lastDay))
-            
+
+            setData(
+                diaryList.filter((item) => firstDay <= item.date && item.date <= lastDay)
+            )
         }
-
-
-    },[diaryList,curDate])
+    },[curDate, diaryList])
 
     useEffect(() => {
         console.log(data)
-    },[data])
-
-
-    const increaseMonth = () => {
-        setCurDate(new Date(curDate.getFullYear(), curDate.getMonth()+1, curDate.getDate()))
     }
-    const decreaseMonth = () => {
-        setCurDate(new Date(curDate.getFullYear(), curDate.getMonth()-1, curDate.getDate()))
-    }
+    ,[data])
 
     return (
         <div>
