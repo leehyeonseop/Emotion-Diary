@@ -25,11 +25,10 @@ const reducer = (state, action) => {
       newState = state.map((item) => item.id === action.data.id ? {...action.data} : item)
       break;
     }
-    default :
-      return state
+    default : 
+      return state;
   }
-
-  return state;
+  return newState;
 }
 
 export const DiaryStateContext = React.createContext();
@@ -79,7 +78,7 @@ function App() {
   const onCreate = (date, content, emotion) => {
     dispatch({type : "CREATE", data : {
       id : dataId.current,
-      date : new Date(date).getTime,
+      date : new Date(date).getTime(),
       content,
       emotion
     }})
