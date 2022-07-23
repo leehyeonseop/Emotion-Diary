@@ -12,4 +12,4 @@ function EmotionItem(props) {
     )
 }
 
-export default EmotionItem
+export default React.memo(EmotionItem)

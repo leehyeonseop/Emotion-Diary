@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MyButton from './MyButton'
 import { useNavigate } from 'react-router-dom'
 import DiaryItem from './DiaryItem'
@@ -14,9 +14,13 @@ const filterOptionList = [
     { value : "bad", name : "안좋은 감정만"},
 ]
 
-const ControlMenu = (props) => {
+const ControlMenu = React.memo((props) => {
 
     const {value, onChange, optionList} = props
+
+    // useEffect(() => {
+    //     console.log("Control Menu")
+    // })
 
     return (
         <select className='ControlMenu' value={value} onChange={(e) => onChange(e.target.value)}>
@@ -29,7 +33,7 @@ const ControlMenu = (props) => {
             })}
         </select>
     )
-}
+})
 
 function DiaryList(props) {
 

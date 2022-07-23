@@ -37,4 +37,4 @@ function DiaryItem(props) {
     )
 }
 
-export default DiaryItem
+export default React.memo(DiaryItem);
